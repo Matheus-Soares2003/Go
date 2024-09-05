@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net"
-
 	"github.com/urfave/cli"
 )
 
@@ -14,20 +13,27 @@ func Gerar() *cli.App {
 	app.Name = "Aplicação de linha de comando"
 	app.Usage = "Busca IPs e nomes de servidor na internet"
 
+	flags := []cli.Flag{
+		cli.StringFlag{
+			Name: "host",
+			Value: "devbook.com.br",
+		},
+	}
+
 	app.Commands = []cli.Command{
 		{
 			Name: "ip",
 			Usage: "Busca IPs de endereços na internet",
-			Flags: []cli.Flag{
-				cli.StringFlag{
-					Name: "host",
-					Value: "devbook.com.br",
-				},
-			},
+			Flags: flags,
 			Action: buscarIps,
 		},
+		{
+			Name: "servers",
+			Usage: "Busca o nome dos servidores na internet",
+			Flags: flags,
+			Action: buscarServidores,
+		},
 	}
-
 	return app
 }
 
@@ -41,5 +47,18 @@ func buscarIps(c *cli.Context) {
 
 	for _, ip := range ips {
 		fmt.Println(ip)
+	}
+}
+
+func buscarServidores(c *cli.Context) {
+	host := c.String("host")
+	servers, err := net.LookupNS(host) //busca o name server
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, server := range servers {
+		fmt.Println(server)
 	}
 }
