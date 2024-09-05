@@ -1,6 +1,12 @@
 package app
 
-import "github.com/urfave/cli"
+import (
+	"fmt"
+	"log"
+	"net"
+
+	"github.com/urfave/cli"
+)
 
 //Retorna a aplicação de CLI pronta para ser executada
 func Gerar() *cli.App {
@@ -26,5 +32,14 @@ func Gerar() *cli.App {
 }
 
 func buscarIps(c *cli.Context) {
+	host := c.String("host") //Pega o valor da flag host
+	ips, err := net.LookupIP(host) //Retorna um slice de IPs ou erro
 
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, ip := range ips {
+		fmt.Println(ip)
+	}
 }
