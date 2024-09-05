@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"command_line/app"
+	"fmt"
+)
 
 func main() {
 	fmt.Println("Ponto de partida")
+	app.Gerar()
 }
