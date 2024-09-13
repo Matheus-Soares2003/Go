@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-
-	"golang.org/x/text/cases"
 )
 
 type Aluno struct {
@@ -30,7 +28,7 @@ func main(){
 		
 		switch opc {
 		case 1:
-			//cadastrarAluno(Aluno)
+			cadastrarAluno(&alunos)
 		case 2:
 			//listarAlunos()
 		case 3:
@@ -38,10 +36,33 @@ func main(){
 		case 4:
 			//deletarAluno()
 		case 5:
-			break
+			fmt.Println("Saindo...")
 		default:
 			fmt.Println("OPÇÃO INVÁLIDA! Tente novamente...")
-			fmt.Println("====================================================\n\n")
+			fmt.Println("====================================================")
+		}
+
+		if opc == 5 {
+			break
 		}
 	}
+}
+
+func cadastrarAluno(listaAlunos *[]Aluno) {
+
+	var aluno Aluno
+	
+	fmt.Print("RA: ")
+	fmt.Scanf("%d", aluno.ra)
+	fmt.Println()
+	fmt.Print("NOME: ")
+	fmt.Scanf("%s", aluno.nome)
+	fmt.Println()
+	fmt.Print("IDADE: ")
+	fmt.Scanf("%d", aluno.idade)
+	fmt.Println()
+	fmt.Print("CURSO: ")
+	fmt.Scanf("%s", aluno.curso)
+
+	*listaAlunos = append(*listaAlunos, aluno)
 }
