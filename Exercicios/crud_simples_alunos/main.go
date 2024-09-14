@@ -73,7 +73,9 @@ func cadastrarAluno(listaAlunos *[]Aluno) {
 
 func listarAlunos(listaAlunos *[]Aluno) {
 	for _, aluno := range *listaAlunos {
-		fmt.Printf("\nRA: %s | Nome: %s | Idade: %d anos | Curso: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
+		if aluno.ra != " " {
+			fmt.Printf("\nRA: %s | Nome: %s | Idade: %d anos | Curso: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
+		}
 	}
 }
 
