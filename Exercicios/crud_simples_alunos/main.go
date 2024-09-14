@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Aluno struct {
@@ -17,6 +18,7 @@ func main(){
 	var (
 		alunos []Aluno
 		opc int
+		raPesquisa string
 	)
 
 	for opc != 5 {
@@ -32,12 +34,13 @@ func main(){
 		case 2:
 			listarAlunos(&alunos)
 		case 3:
-			var raPesquisa string
 			fmt.Print("RA do aluno a ser atualizado: ")
 			fmt.Scan(&raPesquisa)
 			atualizarRegistroAluno(raPesquisa, &alunos)
 		case 4:
-			//deletarAluno(ra, &alunos)
+			fmt.Print("RA do aluno a ser deletado: ")
+			fmt.Scan(&raPesquisa)
+			deletarAluno(raPesquisa, &alunos)
 		case 5:
 			fmt.Println("Saindo...")
 		default:
@@ -84,6 +87,27 @@ func atualizarRegistroAluno(ra string, listaAlunos *[]Aluno) {
 			fmt.Scan(&aluno.curso)
 
 			(*listaAlunos)[idx] = aluno
+			return
+		}
+	}
+
+	fmt.Println("ALUNO NÃO ENCONTRADO PARA O RA " + ra)
+}
+
+func deletarAluno(ra string, listaAlunos *[]Aluno) {
+
+	for idx, aluno := range *listaAlunos {
+		if aluno.ra == ra {
+			fmt.Printf("\n=====DADOS DO ALUNO=====\nRA: %s | NOME: %s | IDADE: %d anos | CURSO: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
+
+			var confirmarDeletar string
+			fmt.Print("\nDeseja deletar este usuário? [S/N]")
+			fmt.Scan(&confirmarDeletar)
+
+			if strings.Compare(confirmarDeletar[:1], "S") == 0 {
+				(*listaAlunos)[idx] = Aluno{}
+				fmt.Println("Aluno deletado!")
+			}
 			return
 		}
 	}
