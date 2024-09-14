@@ -73,7 +73,7 @@ func cadastrarAluno(listaAlunos *[]Aluno) {
 
 func listarAlunos(listaAlunos *[]Aluno) {
 	for _, aluno := range *listaAlunos {
-		if aluno.ra != " " {
+		if aluno.ra != "" {
 			fmt.Printf("\nRA: %s | Nome: %s | Idade: %d anos | Curso: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
 		}
 	}
@@ -111,7 +111,7 @@ func deletarAluno(ra string, listaAlunos *[]Aluno) {
 			fmt.Print("\nDeseja deletar este usuário? [S/N]")
 			fmt.Scan(&confirmarDeletar)
 
-			if strings.Compare(confirmarDeletar[:1], "S") == 0 {
+			if strings.Compare(strings.ToUpper(confirmarDeletar[:1]), "S") == 0 {
 				(*listaAlunos)[idx] = Aluno{}
 				fmt.Println("Aluno deletado!")
 			}
@@ -131,5 +131,4 @@ func alunoExiste(ra string, listaAlunos *[]Aluno) bool{
 	}
 
 	return false
-
 }
