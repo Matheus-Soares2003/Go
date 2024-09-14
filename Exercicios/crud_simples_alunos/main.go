@@ -63,6 +63,11 @@ func cadastrarAluno(listaAlunos *[]Aluno) {
 	fmt.Print("CURSO: ")
 	fmt.Scan(&aluno.curso)
 
+	if alunoExiste(aluno.ra, listaAlunos) {
+		fmt.Println("ESSE RA JÁ EXISTE!")
+		return
+	}
+
 	*listaAlunos = append(*listaAlunos, aluno)
 }
 
@@ -113,5 +118,16 @@ func deletarAluno(ra string, listaAlunos *[]Aluno) {
 	}
 
 	fmt.Println("ALUNO NÃO ENCONTRADO PARA O RA " + ra)
+}
+
+func alunoExiste(ra string, listaAlunos *[]Aluno) bool{
+
+	for _, aluno := range *listaAlunos {
+		if aluno.ra == ra {
+			return true
+		}
+	}
+
+	return false
 
 }
