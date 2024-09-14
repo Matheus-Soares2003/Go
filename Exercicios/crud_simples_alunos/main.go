@@ -76,16 +76,14 @@ func atualizarRegistroAluno(ra string, listaAlunos *[]Aluno) {
 			fmt.Printf("\n=====DADOS DO ALUNO=====\nRA: %s | NOME: %s | IDADE: %d anos | CURSO: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
 			fmt.Printf("\n\n=====NOVOS DADOS=====\n")
 
-			alunoAtualizado := aluno
-
 			fmt.Print("NOME: ")
-			fmt.Scan(&alunoAtualizado.nome)
+			fmt.Scan(&aluno.nome)
 			fmt.Print("IDADE: ")
-			fmt.Scan(&alunoAtualizado.idade)
+			fmt.Scan(&aluno.idade)
 			fmt.Print("CURSO: ")
-			fmt.Scan(&alunoAtualizado.curso)
+			fmt.Scan(&aluno.curso)
 
-			(*listaAlunos)[idx] = alunoAtualizado
+			(*listaAlunos)[idx] = aluno
 			return
 		}
 	}
