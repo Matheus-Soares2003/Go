@@ -32,15 +32,18 @@ func main(){
 		case 2:
 			listarAlunos(&alunos)
 		case 3:
-			//atualizarAluno()
+			var raPesquisa string
+			fmt.Print("RA do aluno a ser atualizado: ")
+			fmt.Scan(&raPesquisa)
+			atualizarRegistroAluno(raPesquisa, &alunos)
 		case 4:
-			//deletarAluno()
+			//deletarAluno(ra, &alunos)
 		case 5:
 			fmt.Println("Saindo...")
 		default:
 			fmt.Println("OPÇÃO INVÁLIDA! Tente novamente...")
 		}
-		fmt.Println("\n====================================================")
+		fmt.Println("\n==================================================")
 	}
 }
 
@@ -64,4 +67,29 @@ func listarAlunos(listaAlunos *[]Aluno) {
 	for _, aluno := range *listaAlunos {
 		fmt.Printf("\nRA: %s | Nome: %s | Idade: %d anos | Curso: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
 	}
+}
+
+func atualizarRegistroAluno(ra string, listaAlunos *[]Aluno) {
+
+	for idx, aluno := range *listaAlunos {
+		if aluno.ra == ra {
+			fmt.Printf("\n=====DADOS DO ALUNO=====\nRA: %s | NOME: %s | IDADE: %d anos | CURSO: %s", aluno.ra, aluno.nome, aluno.idade, aluno.curso)
+			fmt.Printf("\n\n=====NOVOS DADOS=====\n")
+
+			alunoAtualizado := aluno
+
+			fmt.Print("NOME: ")
+			fmt.Scan(&alunoAtualizado.nome)
+			fmt.Print("IDADE: ")
+			fmt.Scan(&alunoAtualizado.idade)
+			fmt.Print("CURSO: ")
+			fmt.Scan(&alunoAtualizado.curso)
+
+			(*listaAlunos)[idx] = alunoAtualizado
+			return
+		}
+	}
+
+	fmt.Println("ALUNO NÃO ENCONTRADO PARA O RA " + ra)
+
 }
